@@ -1,0 +1,42 @@
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.content.Context;
+
+public class SensorDeMovimento implements SensorEventListener {
+
+    private SensorManager sensorManager;
+    private Sensor sensorAcelerometro;
+    private Sensor sensorGiroscopio;
+
+    public SensorDeMovimento(Context context) {
+        sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        sensorAcelerometro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        sensorGiroscopio = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+    }
+
+    public void registrarListener() {
+        sensorManager.registerListener(this, sensorAcelerometro, SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this, sensorGiroscopio, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    public void desregistrarListener() {
+        sensorManager.unregisterListener(this);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if (event.sensor == sensorAcelerometro) {
+         
+            float[] valoresAcelerometro = event.values;
+    
+        } else if (event.sensor == sensorGiroscopio) {
+      
+            float[] valoresGiroscopio = event.values;
+        
+        }
+    }
+
+    
+}
